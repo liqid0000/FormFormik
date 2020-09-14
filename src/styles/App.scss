@@ -1,0 +1,136 @@
+// Variables
+$color-grey: #eee;
+$color-grey-light: #e6e6e6;
+$color-primary: #cfcccc;
+$radius: 3px;
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+// Function
+@function remy($value, $base: 16px) {
+  @return ($value / $base) * 1rem;
+}
+
+// Mixins
+@mixin transition($prop: all, $duration: .25s, $timing: cubic-bezier(.4,0,1,1)) {
+  transition: $prop $duration $timing;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font: 'Josefin Sans', 'Open sans', Helvetica, sans-serif;
+  margin:0;
+  background: $color-grey-light;
+}
+
+form {
+  padding: remy(32px);
+  padding-top: 1rem;
+  margin-top: -6.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: remy(380px);
+  background-color: #fff;
+  border-radius: $radius;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 3.236rem;
+  text-align: center;
+  font-size: 1.618rem;
+}
+
+.form-group {
+  padding: 0;
+  border: 0;
+  height: 75px;
+  margin-top: 10px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0rem;
+  font-size: 1.1rem;
+  color: grey;
+  //text-transform: uppercase;
+  touch-action: manipulation;
+}
+
+
+
+input,
+button,
+textarea {
+  display: block;
+  padding: .5rem .75rem;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #55595c;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid $color-grey;
+  border-left: 0;
+  border-radius: $radius;
+  @include transition;
+  
+  &:focus {
+    outline: 0;
+    border-bottom-color: $color-primary;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+.panel {
+  background-color: #673ab7 ;
+  display:block;
+  height: 278px !important;
+}
+
+.btn {
+  display: inline-block;
+  padding: .75rem 1rem;
+ // margin: .5rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  vertical-align: middle;
+  white-space: nowrap;
+  background-color: $color-primary;
+  border: 1px solid transparent;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+  cursor: pointer;
+  user-select: none;
+  @include transition;
+  
+  &:focus,
+  &:hover {
+    background-color: lighten($color-primary, 13%);
+    box-shadow: 0 18px 35px rgba(50,50,93,.1),0 8px 15px rgba(0,0,0,.07);
+  }
+  
+  &:focus {
+    outline: 0;
+  }
+  .react-datepicker-wrapper, .react-datepicker__input-container {
+    display: block;
+  }
+}
