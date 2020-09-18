@@ -20,11 +20,15 @@ exports.add = function (req, res) {
     bio.lastName = req.body.lastName;
     bio.email = req.body.email;
     bio.dateEvent = req.body.dateEvent;
+    bio.phoneNumber = req.body.phoneNumber;
+    bio.acceptTerms1 = req.body.acceptTerms1;
+    bio.acceptTerms1 = req.body.acceptTerms2;
+    bio.photoFile = req.body.photoFile;
     bio.save(function (err) {
         if (err) res.json(err);
            res.json({
            message: "New Bio Added!",
-            data: bio
+           data: bio
         });
     });
 };
@@ -48,6 +52,10 @@ exports.update = function (req, res) {
         bio.lastName = req.body.lastName;
         bio.email = req.body.email;
         bio.dateEvent = req.body.dateEvent;
+        bio.phoneNumber = req.body.phoneNumber;
+        bio.acceptTerms1 = req.body.acceptTerms1;
+        bio.acceptTerms1 = req.body.acceptTerms2;
+        bio.photoFile = req.body.photoFile;
         bio.save(function (err) {
             if (err)
                 res.json(err)

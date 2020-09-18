@@ -4,26 +4,27 @@ import FormControl from './FormControl/FormControl'
 import { IFormEvent } from '../../store/actions/formEvent.d'
 import { SuccessMessage } from '../Messages/SuccessMessage'
 import { ErrorMessage } from '../Messages/ErrorMessage'
+import ExportCSV from '../../container/ExportCSV/ExportCSV'
 
 interface Props { 
     initialValues: IFormEvent;
     onSubmit: (formEvent: IFormEvent) => void;
     validationSchema: any;  
     isError: boolean,
-    isSuccess: boolean,
+    isSuccess: boolean,         
 } 
 
 const formEvent = (props: Props) => {
     const {
         initialValues,
         validationSchema,
-        onSubmit,    
+        onSubmit,          
         isError,
-        isSuccess
-    } = props
-  
+        isSuccess,        
+    } = props  
+    
     return(
-        <>
+        <>        
             <div className="panel"></div>
             {( isSuccess ) &&   
                 <SuccessMessage />                
@@ -31,7 +32,7 @@ const formEvent = (props: Props) => {
             {(isError) &&
                 <ErrorMessage />
             }
-            { (!isError && !isSuccess) &&
+            {(!isError && !isSuccess) &&
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -64,10 +65,43 @@ const formEvent = (props: Props) => {
                             handleChange = {formik.handleChange}                                             
                         />                    
                         <FormControl 
+                            control='input'
+                            type='text' 
+                            label='Phone number'
+                            name='phoneNumber'
+                            handleChange = {formik.handleChange}                                             
+                        />                    
+                        <FormControl 
                             control='date'
                             label='Pick a date'
-                            name='dateEvent'/>
+                            name='dateEvent'                            
+                        />
+                         <FormControl 
+                            control='file'
+                            type='file'
+                            label='Photo'
+                            name='photoFile'
+                            setFieldValue = {formik.setFieldValue}
+                        />                                                            
+                        <FormControl
+                            control='checkbox'
+                            type='checkbox'
+                            label='Terms1'
+                            name='acceptTerms1'                                                        
+                        />           
+                        <FormControl                            
+                            control='checkbox'
+                            type='checkbox'
+                            label='Terms2'
+                            name='acceptTerms2'                                           
+                        />                                         
                         <div className='form-group'>
+                            <ExportCSV
+                                csvData={JSON.parse(JSON.stringify(formik.values))}
+                                fileName={'form'}
+                                type='button'                               
+                                isDisabled={!(formik.isValid && formik.dirty)}
+                            />
                             <button
                                 data-testid='buttonSubmit'
                                 id='formButton'
@@ -80,7 +114,7 @@ const formEvent = (props: Props) => {
                     </Form>
                 )}}
             </Formik>
-            }          
+          }
         </>
     )
 }

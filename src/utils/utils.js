@@ -6,3 +6,29 @@ export const convertDate = (date) => {
     if(mm<10) mm='0'+mm;
     return date = mm+'/'+dd+'/'+yyyy;
 }
+
+export const iterateObject = (obj) => {
+    var value = '', header = '';
+            for (let name in obj) {
+                if (obj.hasOwnProperty(name)) {
+                if (isObject(obj[name])) {
+                    var out = iterateObject(obj[name]);
+                    value += out.value;
+                    header += out.header;
+                } else {
+                    value += removeNewLine(obj[name]) + '; ';
+                    header += name + '; ';
+                }
+                }
+            }
+    return {
+        "value":value,
+        "header":header
+    };
+}
+const isObject = (obj) => {
+    return (typeof obj === 'object');
+}
+const removeNewLine = (item) => {
+    return item.toString().replace(/(\r\n|\n|\r)/gm,"");
+}  

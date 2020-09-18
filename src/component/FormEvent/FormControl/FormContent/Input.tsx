@@ -10,7 +10,7 @@ interface Props{
 }
 
 function Input (props: Props) {
-  const { label, name, type,handleChange , ...rest } = props  
+  const { label, name, type, handleChange , ...rest } = props  
   return (
     <div className='form-group'>
       <label data-testid={`${name}Label`} htmlFor={name}>{label}</label>

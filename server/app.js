@@ -18,7 +18,7 @@ app.use('/api', apiRoutes)
 app.use(bodyParser.json());
 
 //connect to mongoose
-const dbPath = 'mongodb://localhost/firstrest';
+const dbPath = 'mongodb://localhost/event';
 const options = {useNewUrlParser: true, useUnifiedTopology: true}
 const mongo = mongoose.connect(dbPath, options);
 mongo.then(() => {
