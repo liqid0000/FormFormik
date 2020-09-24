@@ -18,8 +18,7 @@ function Input (props: Props) {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{
           e.persist = () => {}
           handleChange(`${name}`)(e)
-        }}
-         // placeholder={`${name}`}
+        }}     
           data-testid={`${name}Input`}
           type={type}
           id={name}

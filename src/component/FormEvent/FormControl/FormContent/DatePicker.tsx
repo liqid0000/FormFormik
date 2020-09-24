@@ -13,7 +13,7 @@ function DatePicker (props: Props) {
   const { label, name, ...rest } = props
   return (
     <div className='form-group'>
-      <label  style={{display: 'block'}}   htmlFor={name} data-testid={`${name}Label`}>{label}</label>
+      <label  style={{display: 'block'}} htmlFor={name} data-testid={`${name}Label`}>{label}</label>
       <Field name={name}  style={{display: 'block'}}>
         {({ form, field }: any) => {
           const { setFieldValue } = form

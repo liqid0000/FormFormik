@@ -32,3 +32,4 @@ const isObject = (obj) => {
 const removeNewLine = (item) => {
     return item.toString().replace(/(\r\n|\n|\r)/gm,"");
 }  
+

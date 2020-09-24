@@ -81,7 +81,10 @@ const formEvent = (props: Props) => {
                             type='file'
                             label='Photo'
                             name='photoFile'
+                            errors={formik.errors}
+                            touched={formik.touched}
                             setFieldValue = {formik.setFieldValue}
+                            
                         />                                                            
                         <FormControl
                             control='checkbox'
@@ -95,7 +98,7 @@ const formEvent = (props: Props) => {
                             label='Terms2'
                             name='acceptTerms2'                                           
                         />                                         
-                        <div className='form-group'>
+                        <div className='form-group' style={{marginBottom:'20px'}}>
                             <ExportCSV
                                 csvData={JSON.parse(JSON.stringify(formik.values))}
                                 fileName={'form'}

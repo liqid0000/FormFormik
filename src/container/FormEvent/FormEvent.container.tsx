@@ -7,10 +7,8 @@ import { IFormEvent } from '../../store/actions/formEvent.d'
 
 const formEventContainer = (props: any) => {
     const phoneRegExp = /^(?<!\w)(\(?(\+|00)?48\)?)?[ -]?\d{3}[ -]?\d{3}[ -]?\d{3}(?!\w)/
-    // /^(?:(?:(?:\+|00)?48)|(?:\(\+?48\)))?(?:1[2-8]|2[2-69]|3[2-49]|4[1-68]|5[0-9]|6[0-35-9]|[7-8][1-9]|9[145])\d{7}/
-    ///^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
-    const FILE_SIZE = 10000 * 1024
+    const FILE_SIZE = 10 * 1000 * 1024;
 
     const SUPPORTED_FORMATS = [
       "image/jpg",
@@ -33,7 +31,7 @@ const formEventContainer = (props: any) => {
         phoneNumber: string,
         acceptTerms1: boolean,
         acceptTerms2: boolean,
-        photoFile: any//Object | null,        
+        photoFile: any,
     }
 
     
@@ -45,14 +43,16 @@ const formEventContainer = (props: any) => {
         phoneNumber: '',
         acceptTerms1: false,
         acceptTerms2: false,    
-        photoFile: null
+        photoFile: null,
     }
        
     const onSubmit = (values : IFormEvent) => {       
         performSendUserEvent(JSON.parse(JSON.stringify(values)))       
         console.log(JSON.parse(JSON.stringify(values)))         
     }      
+
     
+      
     const validationSchema = Yup.object({
         firstName: Yup
             .string()       
@@ -88,15 +88,19 @@ const formEventContainer = (props: any) => {
             .mixed()
             .required("A file is required")
             .test(
+              "fileHeight",
+              "to big image resoltion",               
+              value => !value || !value.height || !value.height || ( value.width < 1000 && value.width < 1000) )                
+            .test(
               "fileSize",
-              "File too large",
-              value => value && value.size <= FILE_SIZE
-            )            
+              "File too large",            
+              value => !value || (value && value.size <= FILE_SIZE))            
             .test(
               "fileFormat",
               "Unsupported Format",
-              value => value && SUPPORTED_FORMATS.includes(value.type)
-            )            
+              value => !value || (value && SUPPORTED_FORMATS.includes(value.type))
+            )        
+              
         })
     return (      
         <FormEvent
